@@ -1,0 +1,21 @@
+#Ele cria o site front-end e o nomeia frontend.
+#O código define uma variável de ambiente para o site: ProductEndpoint=http://backend:8080. Este é o código pelo qual o serviço de front-end encontra o serviço de back-end de Produtos.
+#O código abre uma porta e declara que ela depende do serviço de back-end.
+#O serviço de back-end chamado back-end é criado em seguida.
+#O último comando especifica qual porta deve ser aberta.
+version: '3.4'
+
+services: 
+
+    frontend:
+        image: store:latest
+        environment: 
+            - ProductEndpoint=http://backend:8080
+        ports:
+            - "32000:8080"
+        depends_on: 
+            - backend
+    backend:
+        image: products:latest
+        ports: 
+            - "32001:8080"
